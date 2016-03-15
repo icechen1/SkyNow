@@ -2,6 +2,7 @@ package com.yuchenhou.skynow.presenter;
 
 import android.os.Bundle;
 
+import com.yuchenhou.skynow.SkyNowApp;
 import com.yuchenhou.skynow.data.EventData;
 import com.yuchenhou.skynow.fragment.ViewEventFragment;
 
@@ -21,7 +22,7 @@ public class ViewEventPresenter extends RxPresenter<ViewEventFragment> {
         super.onCreate(savedState);
 
         restartableLatestCache(REQUEST_LATEST_EVENT,
-                () -> EventData.getLatestEvent()
+                () -> EventData.getInstance(SkyNowApp.getAppContext()).getLatestEvent()
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribeOn(Schedulers.newThread()),
                 ViewEventFragment::setEvent,

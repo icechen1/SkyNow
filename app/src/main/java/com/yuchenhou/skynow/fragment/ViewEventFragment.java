@@ -1,7 +1,6 @@
 package com.yuchenhou.skynow.fragment;
 
 import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,7 +38,7 @@ public class ViewEventFragment extends NucleusSupportFragment<ViewEventPresenter
         return mBinding.getRoot();
     }
 
-    public ViewDataBinding getViewDataBinding() {
+    public FragmentEventBinding getViewDataBinding() {
         return mBinding;
     }
 
