@@ -31,10 +31,11 @@
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:paddingLeft="8dp"
                     android:paddingStart="8dp"
-                    android:gravity="center_vertical">
+                    android:gravity="center_vertical"
+                    android:layout_gravity="center_vertical">
 
                     <TextView
                         android:fontFamily="sans-serif-medium"
@@ -55,6 +56,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/duration" />
+
+                    <TextView
+                        tools:text="Countdown"
+                        android:fontFamily="sans-serif-medium"
+                        android:textSize="16sp"
+                        android:textColor="@color/white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/countdown" />
                 </LinearLayout>
 
             </LinearLayout>

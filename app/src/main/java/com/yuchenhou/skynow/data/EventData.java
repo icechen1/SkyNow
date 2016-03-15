@@ -48,6 +48,6 @@ public class EventData {
     }
 
     public Observable<Event> getLatestEvent() {
-        return Observable.just(mParsedEvents[0]);
+        return Observable.just(mParsedEvents[9]);
     }
 }

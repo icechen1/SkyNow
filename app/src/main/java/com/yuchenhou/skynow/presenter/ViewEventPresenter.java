@@ -27,6 +27,7 @@ public class ViewEventPresenter extends RxPresenter<ViewEventFragment> {
                         .subscribeOn(Schedulers.newThread()),
                 ViewEventFragment::setEvent,
                 (fragment, throwable) -> fragment.setEvent(null));
+
     }
 
     public void requestEvent() {
