@@ -1,8 +1,8 @@
 package com.yuchenhou.skynow.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,17 +12,18 @@ import com.yuchenhou.skynow.presenter.ViewEventPresenter;
 
 import nucleus.view.NucleusAppCompatActivity;
 
-public class ViewEventActivity extends NucleusAppCompatActivity<ViewEventPresenter> {
+public class ListEventActivity extends NucleusAppCompatActivity<ViewEventPresenter> {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_event);
+        setContentView(R.layout.activity_listing);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(view -> startActivity(new Intent(this, ListEventActivity.class)));
+        fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show());
     }
 
     @Override

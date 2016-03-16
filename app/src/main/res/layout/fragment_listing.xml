@@ -1,0 +1,14 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable name="event" type="com.yuchenhou.skynow.model.Event"/>
+    </data>
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        android:id="@+id/recyclerview"
+        tools:showIn="@layout/activity_listing">
+    </android.support.v7.widget.RecyclerView>
+
+</layout>

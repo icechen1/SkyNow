@@ -10,6 +10,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import rx.Observable;
 
@@ -49,5 +52,19 @@ public class EventData {
 
     public Observable<Event> getLatestEvent() {
         return Observable.just(mParsedEvents[9]);
+    }
+
+    public Observable<Event> getUpcomingEvents() {
+        List<Event> list = Arrays.asList(mParsedEvents);
+        Collections.sort(list, (e1, e2) -> {
+            if (e1.getStartDate().getTime() - e2.getStartDate().getTime() > 0){
+                return 1;
+            } else if(e1.getStartDate().getTime() - e2.getStartDate().getTime() == 0) {
+                return 0;
+            }
+            return -1;
+        });
+
+        return Observable.from(list);
     }
 }
