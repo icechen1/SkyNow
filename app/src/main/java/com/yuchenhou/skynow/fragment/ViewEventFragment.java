@@ -25,6 +25,7 @@ import static humanize.Humanize.naturalTime;
 
 @RequiresPresenter(ViewEventPresenter.class)
 public class ViewEventFragment extends NucleusSupportFragment<ViewEventPresenter> {
+    public final static String EVENT = "EVENT";
 
     @Bind(R.id.countdown)
     TextView mCountDownTimer;
@@ -34,11 +35,19 @@ public class ViewEventFragment extends NucleusSupportFragment<ViewEventPresenter
     public ViewEventFragment() {
     }
 
+    public static ViewEventFragment newInstance(Event ev) {
+        ViewEventFragment fragment = new ViewEventFragment();
+        Bundle args = new Bundle();
+        args.putParcelable(EVENT, ev);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         if (bundle == null) {
-            getPresenter().requestEvent();
+            getPresenter().requestEvent(getArguments().getParcelable(EVENT));
         }
     }
 

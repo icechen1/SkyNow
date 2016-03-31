@@ -1,5 +1,7 @@
 package com.yuchenhou.skynow.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 import com.yuchenhou.skynow.R;
@@ -14,7 +16,7 @@ import java.util.Locale;
 /**
  * Created by yuchen on 3/10/16.
  */
-public class Event {
+public class Event implements Parcelable {
     public enum EventType {
         LUNAR, SOLAR, METEOR, EARTH, SATELITE, PLANETS
     }
@@ -122,4 +124,39 @@ public class Event {
             return start;
         }
     }
+
+    protected Event(Parcel in) {
+        name = in.readString();
+        type = (EventType) in.readValue(EventType.class.getClassLoader());
+        year = in.readInt();
+        date = in.readString();
+        description = in.readString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeValue(type);
+        dest.writeInt(year);
+        dest.writeString(date);
+        dest.writeString(description);
+    }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<Event> CREATOR = new Parcelable.Creator<Event>() {
+        @Override
+        public Event createFromParcel(Parcel in) {
+            return new Event(in);
+        }
+
+        @Override
+        public Event[] newArray(int size) {
+            return new Event[size];
+        }
+    };
 }

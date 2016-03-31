@@ -8,11 +8,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.yuchenhou.skynow.R;
+import com.yuchenhou.skynow.fragment.ViewEventFragment;
+import com.yuchenhou.skynow.model.Event;
 import com.yuchenhou.skynow.presenter.ViewEventPresenter;
 
 import nucleus.view.NucleusAppCompatActivity;
 
 public class ViewEventActivity extends NucleusAppCompatActivity<ViewEventPresenter> {
+    public final static String EVENT = "EVENT";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +26,13 @@ public class ViewEventActivity extends NucleusAppCompatActivity<ViewEventPresent
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(view -> startActivity(new Intent(this, ListEventActivity.class)));
+
+        if(getIntent().getExtras() != null) {
+            Event ev = getIntent().getExtras().getParcelable(EVENT);
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, ViewEventFragment.newInstance(ev))
+                    .commit();
+        }
     }
 
     @Override

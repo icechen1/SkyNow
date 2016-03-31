@@ -4,8 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 
 import com.yuchenhou.skynow.SkyNowApp;
+import com.yuchenhou.skynow.activity.ListEventActivity;
 import com.yuchenhou.skynow.data.EventData;
-import com.yuchenhou.skynow.fragment.ViewEventFragment;
 import com.yuchenhou.skynow.model.Event;
 
 import nucleus.presenter.RxPresenter;
@@ -15,7 +15,7 @@ import rx.schedulers.Schedulers;
 /**
  * Created by yuchen on 3/10/16.
  */
-public class ViewEventPresenter extends RxPresenter<ViewEventFragment> {
+public class NextEventPresenter extends RxPresenter<ListEventActivity> {
     private static final int REQUEST_LATEST_EVENT = 1;
     private static final String EVENT = "EVENT";
 
@@ -32,9 +32,10 @@ public class ViewEventPresenter extends RxPresenter<ViewEventFragment> {
         restartableLatestCache(REQUEST_LATEST_EVENT,
                 () -> EventData.getInstance(SkyNowApp.getAppContext()).getLatestEvent()
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribeOn(Schedulers.newThread()),
-                (fragment, event) -> fragment.setEvent(mEvent),
-                (fragment, throwable) -> fragment.setEvent(null));
+                        .subscribeOn(Schedulers.newThread())
+                        .take(1),
+                (activity, event) -> activity.setNextEvent(event),
+                (activity, throwable) -> activity.setNextEvent(null));
 
     }
 
@@ -44,8 +45,8 @@ public class ViewEventPresenter extends RxPresenter<ViewEventFragment> {
         state.putParcelable(EVENT, mEvent);
     }
 
-    public void requestEvent(Event event) {
-        mEvent = event;
+    public void requestEvent() {
         start(REQUEST_LATEST_EVENT);
     }
+
 }
